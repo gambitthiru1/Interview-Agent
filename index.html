@@ -1,10 +1,108 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Interview Agent</title>
-    </head>
-    <body>
-    <script>!function(window){const host="https://labs.heygen.com",url=host+"/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiJiYmRlZTgxZWQ5MWI0N2U3YWQ0NTM2MTIx%0D%0ANmFlMTE0YyIsInByZXZpZXdJbWciOiJodHRwczovL2ZpbGVzMi5oZXlnZW4uYWkvYXZhdGFyL3Yz%0D%0AL2JiZGVlODFlZDkxYjQ3ZTdhZDQ1MzYxMjE2YWUxMTRjL2Z1bGwvMi4yL3ByZXZpZXdfdGFyZ2V0%0D%0ALndlYnAiLCJuZWVkUmVtb3ZlQmFja2dyb3VuZCI6ZmFsc2UsImtub3dsZWRnZUJhc2VJZCI6IjEy%0D%0AMWNkZGQ3YzQ3YzRhZmE5Yjc5NThiNjNlY2FhOGFhIiwidXNlcm5hbWUiOiI3NGU1ZDc2MDEyOGE0%0D%0ANjAyOTVhODQ1YjEzMWI0YThlNSJ9&inIFrame=1",clientWidth=document.body.clientWidth,wrapDiv=document.createElement("div");wrapDiv.id="heygen-streaming-embed";const container=document.createElement("div");container.id="heygen-streaming-container";const stylesheet=document.createElement("style");stylesheet.innerHTML=`\n  #heygen-streaming-embed {\n    z-index: 9999;\n    position: fixed;\n    left: 40px;\n    bottom: 40px;\n    width: 200px;\n    height: 200px;\n    border-radius: 50%;\n    border: 2px solid #fff;\n    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.12);\n    transition: all linear 0.1s;\n    overflow: hidden;\n\n    opacity: 0;\n    visibility: hidden;\n  }\n  #heygen-streaming-embed.show {\n    opacity: 1;\n    visibility: visible;\n  }\n  #heygen-streaming-embed.expand {\n    ${clientWidth<540?"height: 266px; width: 96%; left: 50%; transform: translateX(-50%);":"height: 366px; width: calc(366px * 16 / 9);"}\n    border: 0;\n    border-radius: 8px;\n  }\n  #heygen-streaming-container {\n    width: 100%;\n    height: 100%;\n  }\n  #heygen-streaming-container iframe {\n    width: 100%;\n    height: 100%;\n    border: 0;\n  }\n  `;const iframe=document.createElement("iframe");iframe.allowFullscreen=!1,iframe.title="Streaming Embed",iframe.role="dialog",iframe.allow="microphone",iframe.src=url;let visible=!1,initial=!1;window.addEventListener("message",(e=>{e.origin===host&&e.data&&e.data.type&&"streaming-embed"===e.data.type&&("init"===e.data.action?(initial=!0,wrapDiv.classList.toggle("show",initial)):"show"===e.data.action?(visible=!0,wrapDiv.classList.toggle("expand",visible)):"hide"===e.data.action&&(visible=!1,wrapDiv.classList.toggle("expand",visible)))})),container.appendChild(iframe),wrapDiv.appendChild(stylesheet),wrapDiv.appendChild(container),document.body.appendChild(wrapDiv)}(globalThis);</script>   
-    </body>
+<head>
+  <meta charset="utf-8">
+  <!-- Ensure proper scaling on mobile devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interview Agent</title>
+  <style>
+    /* Initial small, circular button */
+    #heygen-streaming-embed {
+      z-index: 9999;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    /* Make visible when initialized */
+    #heygen-streaming-embed.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Expanded state: force full screen */
+    #heygen-streaming-embed.expand {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      border: none;
+      margin: 0;
+    }
+
+    /* Container for the iframe */
+    #heygen-streaming-container {
+      width: 100%;
+      height: 100%;
+    }
+
+    #heygen-streaming-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    (function(window) {
+      const host = "https://labs.heygen.com";
+      const url = host + "/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiJiYmRlZTgxZWQ5MWI0N2U3YWQ0NTM2MTIx%0D%0ANmFlMTE0YyIsInByZXZpZXdJbWciOiJodHRwczovL2ZpbGVzMi5oZXlnZW4uYWkvYXZhdGFyL3Yz%0D%0AL2JiZGVlODFlZDkxYjQ3ZTdhZDQ1MzYxMjE2YWUxMTRjL2Z1bGwvMi4yL3ByZXZpZXdfdGFyZ2V0%0D%0ALndlYnAiLCJuZWVkUmVtb3ZlQmFja2dyb3VuZCI6ZmFsc2UsImtub3dsZWRnZUJhc2VJZCI6IjEy%0D%0AMWNkZGQ3YzQ3YzRhZmE5Yjc5NThiNjNlY2FhOGFhIiwidXNlcm5hbWUiOiI3NGU1ZDc2MDEyOGE0%0D%0ANjAyOTVhODQ1YjEzMWI0YThlNSJ9&inIFrame=1";
+
+      // Create the main wrapper element
+      const wrapDiv = document.createElement("div");
+      wrapDiv.id = "heygen-streaming-embed";
+
+      // Create a container for the iframe
+      const container = document.createElement("div");
+      container.id = "heygen-streaming-container";
+
+      // Create the iframe element
+      const iframe = document.createElement("iframe");
+      iframe.allowFullscreen = false;
+      iframe.title = "Streaming Embed";
+      iframe.role = "dialog";
+      iframe.allow = "microphone";
+      iframe.src = url;
+
+      let visible = false, initial = false;
+
+      // Listen for messages from the HeyGen embed
+      window.addEventListener("message", (e) => {
+        if (e.origin === host && e.data && e.data.type === "streaming-embed") {
+          switch (e.data.action) {
+            case "init":
+              initial = true;
+              wrapDiv.classList.toggle("show", initial);
+              break;
+            case "show":
+              visible = true;
+              wrapDiv.classList.toggle("expand", visible);
+              break;
+            case "hide":
+              visible = false;
+              wrapDiv.classList.toggle("expand", visible);
+              break;
+          }
+        }
+      });
+
+      container.appendChild(iframe);
+      wrapDiv.appendChild(container);
+      document.body.appendChild(wrapDiv);
+    })(globalThis);
+  </script>
+</body>
 </html>
